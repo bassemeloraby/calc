@@ -79,3 +79,21 @@ button:hover {
     max-width: 33.333%;
     background-color: var(--dark);
 }
+
+nav {
+  background-color: aliceblue;
+  padding: 16px 32px;
+}
+
+nav a {
+  margin-right: 16px;
+}
+nav a.active {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.primery-nav {
+  background-color: aliceblue;
+  padding: 16px 32px;
+}
