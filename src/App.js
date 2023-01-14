@@ -1,78 +1,21 @@
-import { Fragment, useState } from 'react';
+import { Fragment} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Calc from './pages/Calc';
 import CalcHelp from './pages/CalcHelp';
+import Home from './pages/Home';
 
 function App() {
-  const [calc, setCalc] = useState('');
-  const [result, setResult] = useState('');
-
-  const ops = ['/', '*', '+', '-', '.'];
-
-  const updateCalc = (value) => {
-    if (
-      (ops.includes(value) && calc === '') ||
-      (ops.includes(value) && ops.includes(calc.slice(-1)))
-    ) {
-      return;
-    }
-    setCalc(calc + value);
-    if (!ops.includes(value)) {
-      // eslint-disable-next-line
-      setResult(eval(calc + value).toString());
-    }
-  };
-
-  const createDigits = () => {
-    const digits = [];
-
-    for (let i = 1; i < 10; i++) {
-      digits.push(
-        <button onClick={() => updateCalc(i.toString())} key={i}>
-          {i}
-        </button>
-      );
-    }
-    return digits;
-  };
-  const calculate = () => {
-    // eslint-disable-next-line
-    setCalc(eval(calc).toString());
-  };
-  const deleteLast = () => {
-    if (calc === '') {
-      return;
-    }
-    const value = calc.slice(0, -1);
-    setCalc(value);
-  };
+  
   return (
     <Fragment>
+    <div className='container'>
       <Navbar />
+      <Home/>
       <Routes>
         <Route path="/calcHelp" element={<CalcHelp />} />
+        <Route path="/calc" element={<Calc />} />
       </Routes>
-      <div className="App">
-        <div className="calculator">
-          <div className="display">
-            {result ? <span>({result})</span> : ''} &nbsp;
-            {calc || '0'}
-          </div>
-          <div className="operators">
-            <button onClick={() => updateCalc('/')}>/</button>
-            <button onClick={() => updateCalc('*')}>*</button>
-            <button onClick={() => updateCalc('+')}>+</button>
-            <button onClick={() => updateCalc('-')}>-</button>
-            <button onClick={deleteLast}>DEL</button>
-          </div>
-          <div className="digits">
-            {createDigits()}
-            <button onClick={() => updateCalc('0')}>0</button>
-            <button onClick={() => updateCalc('.')}>.</button>
-
-            <button onClick={calculate}>=</button>
-          </div>
-        </div>
       </div>
     </Fragment>
   );

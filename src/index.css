@@ -15,7 +15,9 @@
 body {
   background-color: var(--light);
 }
-
+.logo {
+  cursor: pointer;
+}
 .App {
   display: flex;
   min-height: 100vh;
